@@ -31,14 +31,35 @@ client.once(Events.ClientReady, c => {
 	console.log(`Ready! Logged in as ${c.user.tag}`);
 });
 
-client.on("EventsRead" , message =>{
+client.on("PeggyClose" , message =>{
     if(message.content = "il cucciolo"){
         message.reply("Di Peggy");
 
     }else{
         console.log("Unlucky");
     }
-})
+})//peggy close
+
+
+//read and load file in commands directory
+const commandsFile = require("./commands/");
+    for(const file of commandsFile){
+        const commandsName = file.split(".")[0];// prende il nome del file prima del .js
+        console.log("Loading Event" + commandsFile);
+        const command = require(`./commands/${file}`)
+    }
+
+//read and load file in events directory
+const eventsFile = readdirSync("./events/");
+    for(const file of eventsFile){
+        const eventName = file.split(".")[0];
+        console.log(`Loading Event ${eventName}` );
+        const event = require(`./events/${file}`);
+        client.on(eventName, event.bind(null, client));
+
+    }
+
+
 
 // Log in to Discord with your client's token
 
