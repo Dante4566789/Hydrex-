@@ -31,6 +31,15 @@ client.once(Events.ClientReady, c => {
 	console.log(`Ready! Logged in as ${c.user.tag}`);
 });
 
+client.on("EventsRead" , message =>{
+    if(message.content = "il cucciolo"){
+        message.reply("Di Peggy");
+
+    }else{
+        console.log("Unlucky");
+    }
+})
+
 // Log in to Discord with your client's token
 
 client.login(token);
